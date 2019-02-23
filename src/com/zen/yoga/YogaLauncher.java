@@ -105,9 +105,9 @@ public class YogaLauncher extends Launcher {
             mLauncherClient.setDestroyed(true);
             mLauncherClient.getBaseService().disconnect();
             if (mLauncherClient.getOverlayCallback() != null) {
-                mLauncherClient.getOverlayCallback().client = null;
-                mLauncherClient.getOverlayCallback().windowManager = null;
-                mLauncherClient.getOverlayCallback().window = null;
+                mLauncherClient.getOverlayCallback().mClient = null;
+                mLauncherClient.getOverlayCallback().mWindowManager = null;
+                mLauncherClient.getOverlayCallback().mWindow = null;
                 mLauncherClient.setOverlayCallback(null);
             }
             ClientService service = mLauncherClient.getClientService();
