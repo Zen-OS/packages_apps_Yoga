@@ -14,6 +14,13 @@
      limitations under the License.
 -->
 <resources>
+
+    <!-- Icon shapes -->
+    <string name="icon_shape_square_name">Square</string>
+    <string name="icon_shape_circle_name">Circle</string>
+    <string name="icon_shape_squircle_name">Squircle</string>
+    <string name="icon_shape_teardrop_name">Teardrop</string>
+
     <!-- Settings title to show Google Now at -1 screen on launcher. [CHAR LIMIT=50] -->
     <string name="pref_show_google_now_title">Display Google app</string>
     <!-- Settings message explaining when the -1 screen is available on an LTR device. [CHAR LIMIT=100] -->
