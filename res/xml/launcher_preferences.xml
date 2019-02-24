@@ -65,4 +65,31 @@
         android:defaultValue="@string/icon_shape_default"
         android:persistent="false" />
 
+    <PreferenceCategory android:title="@string/about_yoga">
+        <PreferenceScreen
+            android:key="about_screen"
+            android:icon="@drawable/app_info"
+            android:summary="@string/sum_about_app_yoga"
+            android:title="@string/about_yoga_us">
+			<Preference
+                android:key="@string/developer_info"
+                android:title="@string/developer_info"
+                android:summary="@string/developer_info_sum"
+                android:persistent="false">
+            </Preference>
+			<Preference
+                android:key="@string/app_base_title"
+                android:title="@string/app_base_title"
+                android:summary="@string/app_base_title_sum"
+                android:persistent="false">
+            </Preference>
+			<Preference
+                android:key="@string/about_yoga_version"
+                android:title="@string/about_yoga_version"
+                android:summary="@string/about_yoga_version_sum"
+                android:persistent="false">
+            </Preference>
+        </PreferenceScreen>
+    </PreferenceCategory>
+
 </PreferenceScreen>
