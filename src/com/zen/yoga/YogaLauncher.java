@@ -21,6 +21,8 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 
+import com.zen.yoga.quickspace.QuickSpaceView;
+
 import com.android.launcher3.AppInfo;
 import com.android.launcher3.Launcher;
 import com.android.launcher3.LauncherCallbacks;
@@ -45,6 +47,7 @@ public class YogaLauncher extends Launcher {
         public static final String SEARCH_PACKAGE = "com.google.android.googlequicksearchbox";
 
         private final YogaLauncher mLauncher;
+        private QuickSpaceView mQuickSpace;
 
         private OverlayCallbackImpl mOverlayCallbacks;
         private LauncherClient mLauncherClient;
@@ -58,7 +61,9 @@ public class YogaLauncher extends Launcher {
         }
 
         @Override
-        public void onCreate(Bundle savedInstanceState) { 
+        public void onCreate(Bundle savedInstanceState) {
+            mQuickSpace = mLauncher.findViewById(R.id.reserved_container_workspace);
+
             SharedPreferences prefs = Utilities.getPrefs(mLauncher);
             mOverlayCallbacks = new OverlayCallbackImpl(mLauncher);
             mLauncherClient = new LauncherClient(mLauncher, mOverlayCallbacks, new ClientOptions(((prefs.getBoolean(SettingsFragment.KEY_MINUS_ONE, true) ? 1 : 0) | 2 | 4 | 8)));
@@ -68,6 +73,10 @@ public class YogaLauncher extends Launcher {
 
         @Override
         public void onResume() {
+        if (mQuickSpace != null) {
+            mQuickSpace.onResume();
+        }
+
         mResumed = true;
         if (mStarted) {
             mAlreadyOnHome = true;

@@ -43,4 +43,7 @@
     <string name="app_base_title">Based On</string>
     <string name="app_base_title_sum">Based On Pure AOSP Launcher3</string>
 
+    <!-- QuickSpace -->
+    <string name="abbrev_wday_month_day_no_year">EEEEMMMd</string>
+
 </resources>
