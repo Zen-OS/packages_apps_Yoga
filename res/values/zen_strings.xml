@@ -32,6 +32,10 @@
     <string name="statusbar_expand_title">Swipe for notifications</string>
     <string name="statusbar_expand_summary">On the homescreen</string>
 
+    <!-- Swipe down recents clear all -->
+    <string name="allow_swipe_down_clearall_title">Clear all on swipe down from recents view</string>
+    <string name="allow_swipe_down_clearall_desc">Doesn\'t works if P navbar gestures are enable</string>
+
     <!-- About -->
     <string name="about_yoga">About</string>
     <string name="about_yoga_us">Yoga Launcher</string>
