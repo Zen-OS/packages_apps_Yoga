@@ -53,4 +53,9 @@
     <string name="quick_event_rom_intro_welcome">Welcome to ZenOS</string>
     <string name="quick_event_rom_intro_learn">Tap to get started</string>
 
+    <!-- QSB -->
+    <string name="hotseat_qsb_preferences">Preferences</string>
+    <string name="label_search">Search</string>
+    <string name="label_voice_search">Voice search</string>
+
 </resources>

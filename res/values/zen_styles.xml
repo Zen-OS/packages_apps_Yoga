@@ -21,4 +21,10 @@
     <style name="QuickSpaceText">
         <item name="android:fontFamily">sans-serif</item>
     </style>
+
+    <!-- QSB -->
+    <style name="HotseatQsbTheme">
+        <item name="gIcon">@drawable/ic_super_g_color</item>
+        <item name="micIcon">@drawable/ic_poodle_color</item>
+    </style>
 </resources>

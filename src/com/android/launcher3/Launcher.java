@@ -196,6 +196,7 @@ public class Launcher extends BaseDraggingActivity implements LauncherExterns,
     private View mLauncherView;
     @Thunk DragLayer mDragLayer;
     private DragController mDragController;
+    public View mDragHandleIndicator;
 
     private AppWidgetManagerCompat mAppWidgetManager;
     private LauncherAppWidgetHost mAppWidgetHost;
@@ -209,7 +210,7 @@ public class Launcher extends BaseDraggingActivity implements LauncherExterns,
 
     // Main container view for the all apps screen.
     @Thunk AllAppsContainerView mAppsView;
-    AllAppsTransitionController mAllAppsController;
+    public AllAppsTransitionController mAllAppsController;
 
     // UI and state for the overview panel
     private View mOverviewPanel;
@@ -920,6 +921,7 @@ public class Launcher extends BaseDraggingActivity implements LauncherExterns,
         mWorkspace.initParentViews(mDragLayer);
         mOverviewPanel = findViewById(R.id.overview_panel);
         mHotseat = findViewById(R.id.hotseat);
+        mDragHandleIndicator = findViewById(R.id.drag_indicator);
         mHotseatSearchBox = findViewById(R.id.search_container_hotseat);
 
         mLauncherView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -1169,6 +1171,10 @@ public class Launcher extends BaseDraggingActivity implements LauncherExterns,
 
     public Hotseat getHotseat() {
         return mHotseat;
+    }
+
+    public View getDragHandleIndicator() {
+        return mDragHandleIndicator;
     }
 
     public View getHotseatSearchBox() {

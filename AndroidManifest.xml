@@ -56,6 +56,13 @@
     <!-- QuickSpace -->
     <uses-permission android:name="org.pixelexperience.weather.client.READ_WEATHER" />
 
+    <!-- Google QSB -->
+    <permission
+        android:name="com.google.android.apps.nexuslauncher.permission.QSB"
+        android:permissionGroup="android.permission-group.SYSTEM_TOOLS"
+        android:protectionLevel="signatureOrSystem"/>
+    <uses-permission android:name="com.google.android.apps.nexuslauncher.permission.QSB" />
+
     <application
         android:backupAgent="com.android.launcher3.LauncherBackupAgent"
         android:fullBackupOnly="true"
@@ -120,6 +127,11 @@
             android:exported="true"
             android:writePermission="com.android.launcher3.permission.WRITE_SETTINGS"
             android:readPermission="com.android.launcher3.permission.READ_SETTINGS" />
+
+        <provider
+            android:authorities="com.google.android.apps.nexuslauncher.appssearch"
+            android:exported="true"
+            android:name="co.aoscp.lovegood.search.AppSearchProvider" />
 
     </application>
 </manifest>
