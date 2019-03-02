@@ -49,5 +49,8 @@
 
     <!-- QuickSpace -->
     <string name="abbrev_wday_month_day_no_year">EEEEMMMd</string>
+    <!-- QuickSpace: QuickEvent: Device Intro Event -->
+    <string name="quick_event_rom_intro_welcome">Welcome to ZenOS</string>
+    <string name="quick_event_rom_intro_learn">Tap to get started</string>
 
 </resources>
