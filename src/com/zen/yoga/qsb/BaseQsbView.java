@@ -46,6 +46,8 @@ import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
+import com.zen.yoga.Bits;
 import com.zen.yoga.YogaLauncher;
 import com.zen.yoga.YogaLauncher.YogaLauncherCallbacks;
 
@@ -146,9 +148,10 @@ public abstract class BaseQsbView extends FrameLayout implements OnClickListener
     }
 
     public void loadMicViews() {
+        boolean hasGsa = Bits.hasPackageInstalled(getContext(), YogaLauncherCallbacks.SEARCH_PACKAGE);
         mMicIconView = (ImageView) findViewById(R.id.mic_icon);
-        mMicIconView.setOnClickListener(this);
-        mMicIconView.setVisibility(View.VISIBLE);
+        mMicIconView.setOnClickListener(hasGsa ? this : null);
+        mMicIconView.setVisibility(hasGsa ? View.VISIBLE : View.GONE);
         setTouchDelegate(mQsbDelegate);
         requestLayout();
     }
