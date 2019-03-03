@@ -252,7 +252,9 @@ public class AllAppsQsbView extends BaseQsbView implements SearchUiManager, OnCh
             removeDefaultView();
             mUseDefaultSearch = useDefaultSearch;
             ((ImageView) findViewById(R.id.g_icon)).setImageResource(mUseDefaultSearch ? R.drawable.ic_allapps_search : R.drawable.ic_super_g_color);
-            mMicIconView.setAlpha(mUseDefaultSearch ? 0.0f : 1.0f);
+			if (mMicIconView != null) {
+				mMicIconView.setAlpha(mUseDefaultSearch ? 0.0f : 1.0f);
+			}
             if (mUseDefaultSearch) {
                 ensureFallbackView();
                 mDefaultSearchView.setHint(R.string.all_apps_search_bar_hint);
