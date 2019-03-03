@@ -30,4 +30,8 @@ public class Bits {
             return false;
         }
     }
+
+    public static <T> T notNullOrDefault(T value, T defValue) {
+        return value == null ? defValue : value;
+    }
 }

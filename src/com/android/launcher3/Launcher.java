@@ -209,7 +209,7 @@ public class Launcher extends BaseDraggingActivity implements LauncherExterns,
     private DropTargetBar mDropTargetBar;
 
     // Main container view for the all apps screen.
-    @Thunk AllAppsContainerView mAppsView;
+    public AllAppsContainerView mAppsView;
     public AllAppsTransitionController mAllAppsController;
 
     // UI and state for the overview panel

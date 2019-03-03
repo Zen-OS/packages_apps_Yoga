@@ -63,6 +63,20 @@
         android:defaultValue="@bool/allow_swipe_down_clearall"
         android:persistent="true" />
 
+    <PreferenceScreen
+        android:persistent="false"
+        android:title="@string/suggestion_pref_screen_title"
+        android:key="pref_suggestions"
+        android:summary="@string/suggestion_pref_screen_desc">
+
+        <SwitchPreference
+            android:title="@string/app_suggestions_title"
+            android:key="pref_app_suggestions"
+            android:summary="@string/app_suggestions_summary"
+            android:defaultValue="true" />
+
+    </PreferenceScreen>
+
     <ListPreference
         android:key="pref_override_icon_shape"
         android:title="@string/icon_shape_override_label"
