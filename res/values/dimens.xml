@@ -34,7 +34,7 @@
 
     <!-- Hotseat -->
     <dimen name="dynamic_grid_hotseat_top_padding">0dp</dimen>
-    <dimen name="dynamic_grid_hotseat_bottom_padding">72dp</dimen>
+    <dimen name="dynamic_grid_hotseat_bottom_padding">62dp</dimen>
     <!-- Extra bottom padding for non-tall devices. -->
     <dimen name="dynamic_grid_hotseat_bottom_non_tall_padding">15dp</dimen>
     <dimen name="dynamic_grid_hotseat_size">70dp</dimen>
