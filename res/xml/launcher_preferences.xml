@@ -16,9 +16,11 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.android.launcher3.views.ButtonPreference
+    <PreferenceCategory android:title="@string/home_category_title"/>
+        <com.android.launcher3.views.ButtonPreference
         android:key="pref_icon_badging"
         android:title="@string/icon_badging_title"
+        android:icon="@drawable/notifications_dots"
         android:persistent="false"
         android:widgetLayout="@layout/notification_pref_warning" >
         <intent android:action="android.settings.NOTIFICATION_SETTINGS">
@@ -27,28 +29,18 @@
                 android:name=":settings:fragment_args_key"
                 android:value="notification_badging" />
         </intent>
-    </com.android.launcher3.views.ButtonPreference>
+        </com.android.launcher3.views.ButtonPreference>
 
     <SwitchPreference
-        android:key="pref_enable_minus_one"
-        android:title="@string/pref_show_google_now_title"
-        android:summary="@string/pref_show_google_now_summary"
-        android:defaultValue="true" />
-
-    <SwitchPreference
-        android:key="pref_add_icon_to_home"
-        android:title="@string/auto_add_shortcuts_label"
-        android:summary="@string/auto_add_shortcuts_description"
-        android:defaultValue="true"
-        android:persistent="true" />
-
-    <SwitchPreference
-        android:key="pref_allowRotation"
-        android:title="@string/allow_rotation_title"
-        android:summary="@string/allow_rotation_desc"
         android:defaultValue="@bool/allow_rotation"
-        android:persistent="true" />
+        android:icon="@drawable/homescreen_rotation"
+        android:key="pref_allowRotation"
+        android:persistent="true"
+        android:summary="@string/allow_rotation_desc"
+        android:title="@string/allow_rotation_title" />
 
+    <PreferenceCategory 
+        android:title="@string/gestures_category_title" >
     <SwitchPreference
         android:key="pref_expand_statusbar"
         android:title="@string/statusbar_expand_title"
@@ -62,9 +54,21 @@
         android:summary="@string/allow_swipe_down_clearall_desc"
         android:defaultValue="@bool/allow_swipe_down_clearall"
         android:persistent="true" />
+     </PreferenceCategory>
 
-    <PreferenceScreen
+    <PreferenceCategory 
+        android:title="@string/google_category_title">
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:icon="@drawable/google_app"
+        android:key="pref_enable_minus_one"
+        android:summary="@string/pref_show_google_now_summary"
+        android:title="@string/pref_show_google_now_title" />
+
+     <PreferenceScreen
         android:persistent="false"
+        android:icon="@drawable/suggestions"
         android:title="@string/suggestion_pref_screen_title"
         android:key="pref_suggestions"
         android:summary="@string/suggestion_pref_screen_desc">
@@ -74,17 +78,29 @@
             android:key="pref_app_suggestions"
             android:summary="@string/app_suggestions_summary"
             android:defaultValue="true" />
+     </PreferenceScreen>
+     </PreferenceCategory>
 
-    </PreferenceScreen>
+    <PreferenceCategory 
+        android:title="@string/icons_category_title">
+        <ListPreference
+            android:defaultValue="@string/icon_shape_default"
+            android:entries="@array/icon_shape_entries"
+            android:entryValues="@array/icon_shape_paths"
+            android:icon="@drawable/icon_shape"
+            android:key="pref_override_icon_shape"
+            android:persistent="false"
+            android:summary="%s"
+            android:title="@string/icon_shape_override_label" />
 
-    <ListPreference
-        android:key="pref_override_icon_shape"
-        android:title="@string/icon_shape_override_label"
-        android:summary="%s"
-        android:entries="@array/icon_shape_entries"
-        android:entryValues="@array/icon_shape_paths"
-        android:defaultValue="@string/icon_shape_default"
-        android:persistent="false" />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:icon="@drawable/add_icons"
+        android:key="pref_add_icon_to_home"
+        android:persistent="true"
+        android:summary="@string/auto_add_shortcuts_description"
+        android:title="@string/auto_add_shortcuts_label" />
+     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/about_yoga">
         <PreferenceScreen

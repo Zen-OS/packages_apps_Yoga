@@ -15,6 +15,21 @@
 -->
 <resources>
 
+    <!-- Categories -->
+    <string name="home_category_title">Homescreen Settings</string>
+    <string name="google_category_title">Google</string>
+    <string name="google_category_summary">Enable Google Feed and more</string>
+    <string name="icons_category_title">Icons</string>
+    <string name="icons_category_summary">Set icon shape and more</string>
+    <string name="gestures_category_title">Gestures</string>
+    <string name="gestures_category_summary">Enhance your experience</string>
+
+    <!-- Gestures -->
+    <string name="allow_swipe_down_clearall_title">Clear all from recents view</string>
+    <string name="allow_swipe_down_clearall_desc">Swipe vertically downward in recents view to clear all apps.\n\nThis doesn\'t works if P navbar gestures are enabled</string>
+    <string name="statusbar_expand_title">Swipe for notifications</string>
+    <string name="statusbar_expand_summary">On the homescreen</string>
+
     <!-- Icon shapes -->
     <string name="icon_shape_square_name">Square</string>
     <string name="icon_shape_circle_name">Circle</string>
@@ -27,14 +42,6 @@
     <string name="msg_minus_one_on_left">To the right of the main home screen</string>
     <!-- Settings message explaining when the -1 screen is available on an RTL device. [CHAR LIMIT=100] -->
     <string name="msg_minus_one_on_right">To the left of the main home screen</string>
-
-    <!-- Swipe for notifications -->
-    <string name="statusbar_expand_title">Swipe for notifications</string>
-    <string name="statusbar_expand_summary">On the homescreen</string>
-
-    <!-- Swipe down recents clear all -->
-    <string name="allow_swipe_down_clearall_title">Clear all on swipe down from recents view</string>
-    <string name="allow_swipe_down_clearall_desc">Doesn\'t works if P navbar gestures are enable</string>
 
     <!-- About -->
     <string name="about_yoga">About</string>
