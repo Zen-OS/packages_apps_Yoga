@@ -68,8 +68,6 @@ public class SettingsActivity extends Activity {
     private static final int DELAY_HIGHLIGHT_DURATION_MILLIS = 600;
     private static final String SAVE_HIGHLIGHTED_KEY = "android:preference_highlighted";
 
-    public static boolean restartNeeded = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,14 +103,6 @@ public class SettingsActivity extends Activity {
 
             getPreferenceManager().setSharedPreferencesName(LauncherFiles.SHARED_PREFERENCES_KEY);
             addPreferencesFromResource(R.xml.launcher_preferences);
-
-            HomeKeyWatcher mHomeKeyListener = new HomeKeyWatcher(getActivity());
-            mHomeKeyListener.setOnHomePressedListener(() -> {
-                if (restartNeeded) {
-                    ExtraUtils.restart(getActivity());
-                }
-            });
-            mHomeKeyListener.startWatch();
 
             ContentResolver resolver = getActivity().getContentResolver();
 
@@ -208,10 +198,10 @@ public class SettingsActivity extends Activity {
                 mIconBadgingObserver.unregister();
                 mIconBadgingObserver = null;
             }
-            super.onDestroy();
-            if (restartNeeded) {
-                ExtraUtils.restart(getActivity());
-            }
+            // if we don't press the home button but the back button to close Settings,
+            // then we must force a restart because the home button watcher wouldn't trigger it
+             LauncherAppState.getInstanceNoCreate().checkIfRestartNeeded();
+  	     super.onDestroy();
         }
 
         @TargetApi(Build.VERSION_CODES.O)

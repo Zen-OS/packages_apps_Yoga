@@ -52,6 +52,7 @@ import android.view.View;
 import android.view.animation.Interpolator;
 
 import com.android.launcher3.config.FeatureFlags;
+import com.android.launcher3.util.LooperExecutor;
 
 import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
@@ -106,6 +107,8 @@ public final class Utilities {
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1;
 
     public static final int SINGLE_FRAME_MS = 16;
+
+    private static final long WAIT_BEFORE_RESTART = 250;
 
     /**
      * Indicates if the device has a debug build. Should only be used to store additional info or
@@ -618,5 +621,16 @@ public final class Utilities {
         Message msg = Message.obtain(handler, callback);
         msg.setAsynchronous(true);
         handler.sendMessage(msg);
+    }
+
+    public static void restart(final Context context) {
+        //ProgressDialog.show(context, null, context.getString(R.string.state_loading), true, false);
+        new LooperExecutor(LauncherModel.getWorkerLooper()).execute(() -> {
+            try {
+                Thread.sleep(WAIT_BEFORE_RESTART);
+            } catch (Exception ignored) {
+            }
+            android.os.Process.killProcess(android.os.Process.myPid());
+        });
     }
 }
