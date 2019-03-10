@@ -75,4 +75,6 @@
     <string name="label_turn_off_suggestions">TURN OFF</string>
     <string name="all_apps_label">All apps</string>
 
+    <string name="state_loading">Applying\u2026</string>
+
 </resources>

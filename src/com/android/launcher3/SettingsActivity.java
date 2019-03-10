@@ -45,6 +45,7 @@ import android.widget.ListView;
 
 import com.android.launcher3.graphics.IconShapeOverride;
 import com.android.launcher3.notification.NotificationListener;
+import com.android.launcher3.util.ExtraUtils;
 import com.android.launcher3.util.ListViewHighlighter;
 import com.android.launcher3.util.SettingsObserver;
 import com.android.launcher3.views.ButtonPreference;
@@ -66,6 +67,8 @@ public class SettingsActivity extends Activity {
     private static final String EXTRA_SHOW_FRAGMENT_ARGS = ":settings:show_fragment_args";
     private static final int DELAY_HIGHLIGHT_DURATION_MILLIS = 600;
     private static final String SAVE_HIGHLIGHTED_KEY = "android:preference_highlighted";
+
+    public static boolean restartNeeded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +105,14 @@ public class SettingsActivity extends Activity {
 
             getPreferenceManager().setSharedPreferencesName(LauncherFiles.SHARED_PREFERENCES_KEY);
             addPreferencesFromResource(R.xml.launcher_preferences);
+
+            HomeKeyWatcher mHomeKeyListener = new HomeKeyWatcher(getActivity());
+            mHomeKeyListener.setOnHomePressedListener(() -> {
+                if (restartNeeded) {
+                    ExtraUtils.restart(getActivity());
+                }
+            });
+            mHomeKeyListener.startWatch();
 
             ContentResolver resolver = getActivity().getContentResolver();
 
@@ -198,6 +209,9 @@ public class SettingsActivity extends Activity {
                 mIconBadgingObserver = null;
             }
             super.onDestroy();
+            if (restartNeeded) {
+                ExtraUtils.restart(getActivity());
+            }
         }
 
         @TargetApi(Build.VERSION_CODES.O)
