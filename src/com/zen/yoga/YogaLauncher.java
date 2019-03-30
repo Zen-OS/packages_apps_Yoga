@@ -23,6 +23,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.graphics.ColorUtils;
 import android.view.View;
 
 import com.zen.yoga.logging.PredictionsDispatcher;
@@ -35,6 +36,9 @@ import com.android.launcher3.Launcher;
 import com.android.launcher3.LauncherCallbacks;
 import com.android.launcher3.Utilities;
 import com.android.launcher3.R;
+import com.android.launcher3.uioverrides.WallpaperColorInfo;
+import com.android.launcher3.uioverrides.WallpaperColorInfo.OnChangeListener;
+import com.android.launcher3.util.Themes;
 import com.google.android.libraries.gsa.launcherclient.ClientOptions;
 import com.google.android.libraries.gsa.launcherclient.ClientService;
 import com.google.android.libraries.gsa.launcherclient.LauncherClient;
@@ -48,6 +52,7 @@ public class YogaLauncher extends Launcher {
 
     private LauncherClient mLauncherClient;
     private QsbAnimationController mQsbController;
+    private final Bundle mUiInformation = new Bundle();
 
     public YogaLauncher() {
         setLauncherCallbacks(new YogaLauncherCallbacks(this));
@@ -61,7 +66,7 @@ public class YogaLauncher extends Launcher {
         return mQsbController;
     }
 
-    public class YogaLauncherCallbacks implements LauncherCallbacks, OnSharedPreferenceChangeListener {
+    public class YogaLauncherCallbacks implements LauncherCallbacks, OnSharedPreferenceChangeListener, OnChangeListener {
 
         public static final String SEARCH_PACKAGE = "com.google.android.googlequicksearchbox";
 
@@ -94,6 +99,10 @@ public class YogaLauncher extends Launcher {
             mLauncherClient = new LauncherClient(mLauncher, mOverlayCallbacks, new ClientOptions(((mPrefs.getBoolean(SettingsFragment.KEY_MINUS_ONE, true) ? 1 : 0) | 2 | 4 | 8)));
             mOverlayCallbacks.setClient(mLauncherClient);
             mQsbController = new QsbAnimationController(mLauncher);
+            mUiInformation.putInt("system_ui_visibility", mLauncher.getWindow().getDecorView().getSystemUiVisibility());
+            WallpaperColorInfo instance = WallpaperColorInfo.getInstance(mLauncher);
+            instance.addOnChangeListener(this);
+            onExtractedColorsChanged(instance);
             mPrefs.registerOnSharedPreferenceChangeListener(this);
         }
 
@@ -161,6 +170,7 @@ public class YogaLauncher extends Launcher {
                 }
             }
             Utilities.getPrefs(mLauncher).unregisterOnSharedPreferenceChangeListener(this);
+            WallpaperColorInfo.getInstance(mLauncher).removeOnChangeListener(this);
         }
 
         @Override
@@ -244,6 +254,15 @@ public class YogaLauncher extends Launcher {
             }
         }
 
+        @Override
+        public void onExtractedColorsChanged(WallpaperColorInfo wallpaperColorInfo) {
+            int alpha = mLauncher.getResources().getInteger(R.integer.extracted_color_gradient_alpha);
+            mUiInformation.putInt("background_color_hint", primaryColor(wallpaperColorInfo, mLauncher, alpha));
+            mUiInformation.putInt("background_secondary_color_hint", secondaryColor(wallpaperColorInfo, mLauncher, alpha));
+            mUiInformation.putBoolean("is_background_dark", Themes.getAttrBoolean(mLauncher, R.attr.isMainColorDark));
+            mLauncherClient.redraw(mUiInformation);
+        }
+
         public void updatePredictions(boolean force) {
             if (hasBeenResumed() || force) {
                 List<ComponentKeyMapper> apps = ((PredictionsDispatcher) getUserEventDispatcher()).getPredictedApps();
@@ -252,5 +271,17 @@ public class YogaLauncher extends Launcher {
                 }
             }
         }
+    }
+
+    public static int primaryColor(WallpaperColorInfo wallpaperColorInfo, Context context, int alpha) {
+        return compositeAllApps(ColorUtils.setAlphaComponent(wallpaperColorInfo.getMainColor(), alpha), context);
+    }
+
+    public static int secondaryColor(WallpaperColorInfo wallpaperColorInfo, Context context, int alpha) {
+        return compositeAllApps(ColorUtils.setAlphaComponent(wallpaperColorInfo.getSecondaryColor(), alpha), context);
+    }
+
+    public static int compositeAllApps(int color, Context context) {
+        return ColorUtils.compositeColors(Themes.getAttrColor(context, R.attr.allAppsScrimColor), color);
     }
 }
