@@ -283,11 +283,14 @@ public abstract class BaseDraggingActivity extends BaseActivity
         final boolean supportsDarkText = wallpaperColorInfo.supportsDarkText();
         final int systemTheme = Settings.System.getInt(resolver, SYSTEM_THEME, 0);
         switch (systemTheme) {
-            case 1:
-                setTheme(supportsDarkText ? R.style.LauncherTheme_DarkText : R.style.LauncherTheme);
+            case 1: /*Light*/
+                setTheme(supportsDarkText ? R.style.AppTheme_DarkText : R.style.LauncherTheme);
                 break;
-            case 2:
-                setTheme(supportsDarkText ? R.style.LauncherThemeDark_DarKText : R.style.LauncherThemeDark);
+            case 2: /*Dark*/
+                setTheme(supportsDarkText ? R.style.AppTheme_Dark_DarkText : R.style.LauncherTheme_Dark);
+                break;
+            case 3: /*Black*/
+                setTheme(supportsDarkText ? R.style.AppTheme_Black_BlackText : R.style.LauncherTheme_Black);
                 break;
             default:
                 setTheme(mThemeRes);
